@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -62,8 +63,8 @@ class Recipe(models.Model):
     serves = models.CharField(max_length=50, verbose_name='Сервис')
     prep_time = models.PositiveIntegerField(default=0, verbose_name='Время готовки')
     cook_time = models.PositiveIntegerField(default=0)
-    ingredients = models.TextField(verbose_name='Ингридиенты')
-    directions = models.TextField(verbose_name='Направление еды')
+    ingredients = RichTextField(verbose_name='Ингридиенты')
+    directions = RichTextField(verbose_name='Направление еды')
     post = models.ForeignKey(Post, related_name='recipes', on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
