@@ -5,13 +5,6 @@ from mptt.admin import MPTTModelAdmin
 from . import models
 
 
-# admin.site.register(models.Category)
-# admin.site.register(models.Tag)
-# admin.site.register(models.Post)
-# admin.site.register(models.Recipe)
-admin.site.register(models.Comments)
-
-
 @admin.register(models.Category)
 class CategoryAdmin(MPTTModelAdmin, admin.ModelAdmin):
     """Категории"""
@@ -50,3 +43,8 @@ class RecipeAdmin(admin.ModelAdmin):
     """Рецепты"""
     list_display = ('id', 'name', 'prep_time', 'cook_time', 'post')
     list_display_links = ('id', 'name')
+
+
+@admin.register(models.Comments)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'website', 'create_at')

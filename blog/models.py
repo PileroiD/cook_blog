@@ -57,6 +57,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'slug': self.category.slug, 'post_slug': self.slug})
 
+    def get_comments(self):
+        return self.comment.all()
+
 
 class Recipe(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название рецепта')
@@ -79,8 +82,9 @@ class Comments(models.Model):
     """Комментарии"""
     name = models.CharField(max_length=50, verbose_name='Имя пользователя')
     email = models.EmailField(max_length=100, verbose_name='Email')
-    website = models.CharField(max_length=150, verbose_name='WebSite')
+    website = models.CharField(max_length=150, verbose_name='WebSite', blank=True, null=True)
     massage = models.TextField(max_length=500)
+    create_at = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
 
     class Meta:
